@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Приглашение на свадьбу Владислава и Эллады. 01.08.2026, Парк-отель Архангельская слобода.">
+    <title>Владислав & Эллада | Свадебное приглашение</title>
+    <!-- Чистый стиль, вдохновленный минимализмом и структурой PDF -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7f5f0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: #1f1c19;
+            line-height: 1.45;
+        }
+
+        /* контейнер — воздух */
+        .invite-container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* основная карточка — современная, округлая, лёгкая тень */
+        .invite-card {
+            background: #ffffff;
+            border-radius: 36px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(0, 0, 0, 0.02);
+            padding: 2.4rem 2rem;
+        }
+
+        @media (max-width: 680px) {
+            .invite-container {
+                padding: 1rem 1rem 3rem;
+            }
+            .invite-card {
+                padding: 1.6rem 1.2rem;
+                border-radius: 28px;
+            }
+        }
+
+        /* заголовки блоков — как в документе, но мягче */
+        .block-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            color: #3b2a22;
+            margin-bottom: 1rem;
+            border-left: 4px solid #d9b48b;
+            padding-left: 1rem;
+        }
+
+        .section {
+            margin-bottom: 2.8rem;
+        }
+
+        /* первая страница: имена, дата, календарь, счётчик */
+        .hero {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .hero-sub {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #bc8a64;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .names {
+            font-size: 3.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #2b241f;
+            line-height: 1.2;
+            margin: 0.5rem 0;
+        }
+        .names span {
+            font-weight: 400;
+            color: #c47e52;
+            display: inline-block;
+            margin: 0 0.2rem;
+        }
+        .wedding-date {
+            font-size: 1.5rem;
+            font-weight: 500;
+            background: #fef6f0;
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            margin: 0.8rem 0 0.4rem;
+            color: #a55d34;
+        }
+        .timing {
+            font-size: 1rem;
+            color: #6f4f38;
+            margin-top: 0.3rem;
+        }
+        /* календарь (минималистичный) */
+        .calendar-wrap {
+            max-width: 360px;
+            margin: 1.8rem auto 0;
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 0.8rem 0.5rem 0.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02), inset 0 0 0 1px #efe3db;
+        }
+        .cal-month {
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #5a3c2a;
+        }
+        .cal-week {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #b68461;
+            margin: 0.5rem 0;
+        }
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            text-align: center;
+        }
+        .cal-day {
+            padding: 8px 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2d2824;
+            border-radius: 40px;
+        }
+        .cal-day.highlight {
+            background: #fff0e6;
+            color: #bc6b3c;
+            font-weight: 800;
+            position: relative;
+            box-shadow: inset 0 0 0 1.5px #dc9b73;
+        }
+        .cal-day.other {
+            color: #cfc0b4;
+        }
+        /* таймер (дни, часы, минуты, секунды) */
+        .timer-block {
+            margin: 1.8rem 0 0.8rem;
+            text-align: center;
+        }
+        .timer-items {
+            display: flex;
+            justify-content: center;
+            gap: 1.6rem;
+            flex-wrap: wrap;
+        }
+        .timer-unit {
+            text-align: center;
+            min-width: 70px;
+        }
+        .timer-num {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: #fef8f3;
+            padding: 0.2rem 0;
+            border-radius: 24px;
+            color: #5a3a28;
+        }
+        .timer-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: #a77b5c;
+            margin-top: 5px;
+        }
+
+        /* общие карточки для текста */
+        .info-text {
+            background: #fefaf7;
+            padding: 1rem 1.2rem;
+            border-radius: 24px;
+            color: #4c3b2f;
+            font-size: 0.96rem;
+            line-height: 1.45;
+            border: 1px solid #f3e9e2;
+        }
+
+        .location-link {
+            font-weight: 600;
+            color: #2b2a27;
+            text-decoration: none;
+            border-bottom: 1.5px solid #dec7b6;
+            transition: 0.2s;
+        }
+        .location-link:hover {
+            border-bottom-color: #bc744c;
+        }
+
+        /* карта */
+        .map-frame {
+            margin: 1rem 0 0.8rem;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid #e7dbd0;
+            background: #ece2d9;
+        }
+        .map-frame iframe {
+            width: 100%;
+            height: 380px;
+            display: block;
+            filter: grayscale(0.2);
+        }
+
+        /* форма (iframe опрос) */
+        .poll-iframe {
+            background: #ffffff;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid #efe8e1;
+            margin: 1rem 0 0;
+        }
+        .poll-iframe iframe {
+            width: 100%;
+            border: 0;
+            min-height: 600px;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: #c3a689;
+            border-top: 1px solid #ede1d7;
+            padding-top: 1.5rem;
+        }
+
+        hr {
+            margin: 2rem 0;
+            border: none;
+            height: 1px;
+            background: #efe3da;
+        }
+        @media (max-width: 550px) {
+            .names {
+                font-size: 2.5rem;
+            }
+            .block-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="invite-container">
+    <div class="invite-card">
+        <!-- 1. Первая страница: имена, дата, календарик + счётчик (дни, часы, минуты, секунды) -->
+        <div class="hero">
+            <div class="hero-sub">Приглашаем вас на нашу свадьбу</div>
+            <div class="names">
+                Владислав <span>&</span> Эллада
+            </div>
+            <div class="wedding-date">01 АВГУСТА 2026</div>
+            <div class="timing">Начало в 16:00 · Сбор гостей в 15:30</div>
+        </div>
+
+        <!-- календарь с обведённой датой 01.08.2026 -->
+        <div class="calendar-wrap">
+            <div class="cal-month">Август 2026</div>
+            <div class="cal-week">
+                <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+            </div>
+            <div class="cal-grid">
+                <!-- пред. месяц (июль) -->
+                <div class="cal-day other">28</div><div class="cal-day other">29</div><div class="cal-day other">30</div><div class="cal-day other">31</div>
+                <!-- 1 августа — обводим -->
+                <div class="cal-day highlight">1</div>
+                <div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div>
+                <div class="cal-day">7</div><div class="cal-day">8</div><div class="cal-day">9</div><div class="cal-day">10</div><div class="cal-day">11</div>
+                <div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day">15</div><div class="cal-day">16</div>
+                <div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div>
+                <div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div>
+                <div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div><div class="cal-day">31</div>
+                <div class="cal-day other">1</div><div class="cal-day other">2</div>
+            </div>
+            <div style="font-size:0.65rem; text-align:center; margin-top: 10px; color:#c58963;">★ день свадьбы</div>
+        </div>
+
+        <!-- Обратный отсчёт (дни, часы, минуты, секунды) -->
+        <div class="timer-block">
+            <div class="timer-items" id="countdownWidget">
+                <div class="timer-unit"><div class="timer-num" id="days">—</div><div class="timer-label">дней</div></div>
+                <div class="timer-unit"><div class="timer-num" id="hours">—</div><div class="timer-label">часов</div></div>
+                <div class="timer-unit"><div class="timer-num" id="minutes">—</div><div class="timer-label">минут</div></div>
+                <div class="timer-unit"><div class="timer-num" id="seconds">—</div><div class="timer-label">секунд</div></div>
+            </div>
+        </div>
+
+        <!-- 2. Дорогой гость! -->
+        <div class="section">
+            <div class="block-title">Дорогой гость</div>
+            <div class="info-text">
+                Мы рады сообщить Вам, что <strong>01.08.2026</strong> состоится день нашей свадьбы!<br>
+                Приглашаем Вас разделить с нами радость этого дня.
+            </div>
+        </div>
+
+        <!-- 3. Место проведения -->
+        <div class="section">
+            <div class="block-title">Место проведения</div>
+            <div class="info-text" style="margin-bottom:0.8rem;">
+                <a href="https://yandex.ru/maps/org/arkhangelskaya_sloboda/17752996213?si=ej51qjb5rwpnn47kveu08qmpdm" target="_blank" class="location-link">
+                    Парк-отель Архангельская Слобода
+                </a>
+                <div style="margin-top: 10px;">📍 г. Ульяновск</div>
+            </div>
+            <div class="info-text">
+                🏨 Для гостей из других городов предусмотрено размещение. Заселение в дом с 14:00.
+            </div>
+        </div>
+
+        <!-- 4. Примечание (пожелания по подаркам) -->
+        <div class="section">
+            <div class="block-title">Пожелания</div>
+            <div class="info-text">
+                Уважаемые гости, после торжества нам предстоит дорога домой, поэтому мы просим вас не дарить нам объёмные подарки и букеты, которые мы не сможем взять с собой. Но нам будет приятно, если вместо цветов вы выберете <strong>цветочную подписку</strong>.
+            </div>
+        </div>
+
+        <!-- 5. ПОДТВЕРЖДЕНИЕ + iframe с опросом -->
+        <div class="section">
+            <div class="block-title">ПОДТВЕРЖДЕНИЕ</div>
+            <div class="info-text" style="margin-bottom: 0.8rem;">
+                Пожалуйста, подтвердите свое присутствие до <strong>01.07.2026</strong>.<br>
+                Ждем Вас!
+            </div>
+            <!-- встроенный iframe с опросом (яндекс формы) -->
+            <div class="poll-iframe">
+                <script src="https://forms.yandex.ru/_static/embed.js"></script>
+                <iframe src="https://forms.yandex.ru/u/6a04e71a90fa7b21a5752ada?iframe=1" 
+                        frameborder="0" 
+                        name="ya-form-6a04e71a90fa7b21a5752ada" 
+                        width="100%" 
+                        style="min-height: 580px; width:100%;" 
+                        loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- 6. Карта (iframe в конце) -->
+        <div class="section">
+            <div class="block-title">Как нас найти</div>
+            <div class="map-frame">
+                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A3d3bf22f5e871d4ff2db6a888127532b7c62128bb2321de22a76c34dea970839&amp;source=constructor" 
+                        width="100%" height="400" frameborder="0" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            © 2026 · Владислав и Эллада · будем счастливы разделить этот день с вами
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // свадьба: 1 августа 2026 года, 16:00 по местному времени
+        const weddingDate = new Date(2026, 7, 1, 16, 0, 0);
+        
+        function updateCountdown() {
+            const now = new Date();
+            const diffMs = weddingDate - now;
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+            
+            if (diffMs <= 0) {
+                daysEl.innerText = '0';
+                hoursEl.innerText = '0';
+                minutesEl.innerText = '0';
+                secondsEl.innerText = '0';
+                const timerBlock = document.querySelector('.timer-block');
+                if (timerBlock && !document.querySelector('.celebrate-note')) {
+                    const note = document.createElement('div');
+                    note.className = 'celebrate-note';
+                    note.style.marginTop = '1rem';
+                    note.style.fontSize = '0.8rem';
+                    note.style.color = '#bc7f58';
+                    note.innerText = '✨ Этот день настал — счастья вам! ✨';
+                    timerBlock.appendChild(note);
+                }
+                return;
+            }
+            
+            const existing = document.querySelector('.celebrate-note');
+            if (existing) existing.remove();
+            
+            const totalSeconds = Math.floor(diffMs / 1000);
+            const days = Math.floor(totalSeconds / 86400);
+            const hours = Math.floor((totalSeconds % 86400) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            
+            daysEl.innerText = days;
+            hoursEl.innerText = hours < 10 ? '0' + hours : hours;
+            minutesEl.innerText = minutes < 10 ? '0' + minutes : minutes;
+            secondsEl.innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    })();
+</script>
+</body>
+</html>
