@@ -1,0 +1,708 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Владислав & Эллада | Свадебное приглашение</title>
+    <style>
+        /* Подключение пользовательских шрифтов из репозитория */
+        @font-face {
+            font-family: 'Cormorant Infant Bold';
+            src: url('https://raw.githubusercontent.com/La-zilove/Wedding/main/CormorantInfant-Bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Cormorant Infant Light';
+            src: url('https://raw.githubusercontent.com/La-zilove/Wedding/main/CormorantInfant-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Saint Amour Script';
+            src: url('https://raw.githubusercontent.com/La-zilove/Wedding/main/Saint%20Amour%20Script.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            background: #fefcf8;
+            color: #000000;
+            font-family: 'Cormorant Infant Light', 'Times New Roman', serif;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+
+        /* Весь текст черный */
+        .block-title, .hero-sub, .wedding-date, .timer-label, .footer-note,
+        .names, .guest-title, .names .and, .timer-num, .info-text, .location-link, 
+        .footer-note, .timer-label-main, .wedding-sub, .cal-day, .cal-week span,
+        .timing-item, .location-address {
+            color: #000000;
+        }
+
+
+        /* Единый стиль для всех заголовков разделов */
+        .section-title, .timer-label-main {
+            font-family: 'Cormorant Infant Bold', 'Georgia', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+
+        .block-title {
+            font-family: 'Cormorant Infant Bold', 'Georgia', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+
+        .invite-container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 4rem;
+        }
+
+
+        .invite-card {
+            background: transparent;
+            padding: 1rem 0;
+        }
+
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+
+        /* Двойной отступ над блоком "Место проведения" */
+        .location-section {
+            margin-top: 4rem;
+            margin-bottom: 3rem;
+        }
+
+
+        /* Hero секция */
+        .hero {
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .hero-sub {
+            font-size: 1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            font-family: 'Cormorant Infant Bold', serif;
+            font-weight: 700;
+        }
+
+
+        /* Гибкое отображение имени: на очень узких экранах — три строки, иначе в одну */
+        .names {
+            font-family: 'Cormorant Infant Bold', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0.2rem 0 0.5rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: baseline;
+            gap: 0.3rem;
+        }
+        /* По умолчанию все слова в одной строке */
+        .name-word {
+            display: inline-block;
+            white-space: nowrap;
+        }
+        /* На маленьких экранах (менее 560px) заставляем каждое слово с новой строки */
+        @media (max-width: 560px) {
+            .names {
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            .name-word {
+                display: block;
+                text-align: center;
+                width: 100%;
+            }
+        }
+        .names .and {
+            font-family: 'Saint Amour Script', cursive;
+            font-size: 4rem;
+            font-weight: normal;
+            display: inline-block;
+            margin: 0 0.2rem;
+        }
+
+
+        .wedding-date {
+            font-size: 1.8rem;
+            background: transparent;
+            display: inline-block;
+            padding: 0;
+            margin: 0.8rem 0 0.2rem;
+            font-weight: 600;
+            font-family: 'Cormorant Infant Bold', serif;
+        }
+        .wedding-sub {
+            font-family: 'Cormorant Infant Light', serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin-top: 0;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+
+        /* КАЛЕНДАРЬ */
+        .calendar-wrap {
+            max-width: 360px;
+            margin: 1.5rem auto 0;
+            background: transparent;
+            border-radius: 28px;
+            padding: 0.8rem 0.5rem 0.5rem;
+        }
+        .cal-month {
+            display: none;
+        }
+        .cal-week {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-family: 'Cormorant Infant Bold', serif;
+        }
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            text-align: center;
+        }
+        .cal-day {
+            padding: 8px 0;
+            font-size: 0.95rem;
+            font-weight: 400;
+            border-radius: 40px;
+            font-family: 'Cormorant Infant Light', serif;
+        }
+        .cal-day.highlight {
+            background: transparent;
+            font-weight: 800;
+            position: relative;
+        }
+        .heart-outline {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 52px;
+            height: 52px;
+            pointer-events: none;
+        }
+        .heart-outline::before {
+            content: "❤";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.3rem;
+            color: #d48e6c;
+            opacity: 0.65;
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: normal;
+        }
+        .cal-day.other {
+            color: #bfb2a2;
+        }
+
+
+        /* Блок "Дорогой гость" */
+        .invitation-block {
+            margin: 1rem 0 2rem;
+        }
+        .guest-title {
+            font-family: 'Saint Amour Script', cursive;
+            font-size: 8rem;
+            font-weight: normal;
+            text-align: center;
+            margin: 1rem 0 0.8rem;
+            letter-spacing: 1px;
+        }
+        .info-text {
+            background: transparent;
+            padding: 0.5rem 0;
+            border-radius: 0;
+            border: none;
+            font-size: 1.05rem;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+
+        /* ТАЙМЕР */
+        .timer-block {
+            margin: 2rem 0 1.5rem;
+            text-align: center;
+        }
+        .timer-items {
+            display: flex;
+            justify-content: center;
+            gap: 1vw;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+        .timer-unit {
+            text-align: center;
+            flex: 1 1 0;
+            min-width: 0;
+        }
+        .timer-num {
+            font-family: 'Cormorant Infant Bold', monospace;
+            font-size: clamp(1.3rem, 5vw, 2.2rem);
+            font-weight: 700;
+            background: transparent;
+            padding: 0.2rem 0;
+            border-radius: 24px;
+            white-space: nowrap;
+        }
+        .timer-label {
+            font-size: clamp(0.6rem, 2.5vw, 0.8rem);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-top: 6px;
+            white-space: nowrap;
+            font-family: 'Cormorant Infant Bold', serif;
+        }
+
+
+        .location-link {
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px solid #d4c9bd;
+            transition: 0.2s;
+        }
+        .location-link:hover {
+            border-bottom-color: #8f7a68;
+        }
+
+
+        .location-img {
+            margin: 1rem 0 1.2rem;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid #e0d5ca;
+        }
+        .location-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+
+        .location-address {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+
+        /* Кнопка "Открыть карту" — теперь ниже блока про заселение */
+        .map-button {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid #000000;
+            padding: 0.6rem 1.8rem;
+            border-radius: 60px;
+            font-family: 'Cormorant Infant Bold', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: #000000;
+            transition: all 0.2s ease;
+            margin: 0.5rem auto;
+            cursor: pointer;
+            text-align: center;
+        }
+        .map-button:hover {
+            background: #000000;
+            color: #ffffff;
+            border-color: #000000;
+        }
+        .button-wrapper {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+
+        /* Стили для программы дня */
+        .timing-section {
+            margin: 2rem 0 2rem;
+        }
+        .timing-list {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .timing-item {
+            font-family: 'Cormorant Infant Light', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 0.5rem 0;
+        }
+        .timing-item strong {
+            font-family: 'Cormorant Infant Bold', serif;
+            font-weight: 700;
+        }
+
+
+        .map-frame {
+            margin: 1rem 0 0.8rem;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid #e0d5ca;
+        }
+        .map-frame iframe {
+            width: 100%;
+            height: 380px;
+            display: block;
+            filter: grayscale(100%);
+            transition: filter 0.2s ease;
+        }
+        .map-frame iframe:hover {
+            filter: grayscale(80%);
+        }
+
+
+        .poll-iframe {
+            background: #fff;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid #ece2d8;
+            margin: 1rem 0 0;
+        }
+        .poll-iframe iframe {
+            width: 100%;
+            border: 0;
+            display: block;
+            height: 520px;
+        }
+        
+        .waiting-text {
+            font-family: 'Saint Amour Script', cursive;
+            font-size: 4rem;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+
+        @media (max-width: 600px) {
+            .poll-iframe iframe {
+                height: 540px;
+            }
+            .guest-title {
+                font-size: 5rem;
+            }
+            .waiting-text {
+                font-size: 2.8rem;
+            }
+            .section-title, .timer-label-main, .block-title {
+                font-size: 1rem;
+            }
+            .timing-item {
+                font-size: 0.95rem;
+            }
+            .location-address {
+                font-size: 1rem;
+            }
+        }
+
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            border-top: 1px solid #ece2d8;
+            padding-top: 1.8rem;
+        }
+
+
+        @media (max-width: 650px) {
+            .names {
+                font-size: 2.5rem;
+            }
+            .names .and {
+                font-size: 2.5rem;
+            }
+            .wedding-date {
+                font-size: 1.3rem;
+            }
+            .guest-title {
+                font-size: 4rem;
+                margin: 1rem 0;
+            }
+            .waiting-text {
+                font-size: 2.5rem;
+            }
+            .section-title, .timer-label-main, .block-title {
+                font-size: 1rem;
+            }
+            .map-button {
+                font-size: 0.9rem;
+                padding: 0.5rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+    <audio id="bg-music" loop preload="auto" crossorigin="anonymous">
+        <source src="https://raw.githubusercontent.com/La-zilove/Wedding/main/melody.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <div class="invite-container">
+        <div class="invite-card">
+
+
+            <!-- ШАПКА: имена центрированы, на узких экранах каждое слово с новой строки -->
+            <div class="hero">
+                <div class="hero-sub">ВЫ ПРИГЛАШЕНЫ НА СВАДЬБУ</div>
+                <div class="names">
+                    <span class="name-word">ВЛАДИСЛАВ</span>
+                    <span class="name-word and">and</span>
+                    <span class="name-word">ЭЛЛАДА</span>
+                </div>
+                <div class="wedding-date">1 АВГУСТА 2026</div>
+                <div class="wedding-sub">СУББОТА</div>
+            </div>
+
+
+            <!-- КАЛЕНДАРЬ -->
+            <div class="calendar-wrap">
+                <div class="cal-week">
+                    <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+                </div>
+                <div class="cal-grid">
+                    <div class="cal-day other">27</div>
+                    <div class="cal-day other">28</div>
+                    <div class="cal-day other">29</div>
+                    <div class="cal-day other">30</div>
+                    <div class="cal-day other">31</div>
+                    <div class="cal-day highlight" style="position: relative;">
+                        1
+                        <div class="heart-outline"></div>
+                    </div>
+                    <div class="cal-day">2</div>
+                    <div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div><div class="cal-day">9</div>
+                    <div class="cal-day">10</div><div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day">15</div><div class="cal-day">16</div>
+                    <div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div>
+                    <div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div>
+                    <div class="cal-day">31</div>
+                    <div class="cal-day other">1</div><div class="cal-day other">2</div><div class="cal-day other">3</div><div class="cal-day other">4</div><div class="cal-day other">5</div><div class="cal-day other">6</div>
+                </div>
+            </div>
+
+
+            <!-- Блок "Дорогой гость" -->
+            <div class="invitation-block">
+                <div class="guest-title">Дорогой гость</div>
+                <div class="info-text">
+                    Мы рады сообщить Вам, что 01.08.2026 состоится торжество в честь нашей свадьбы!<br>
+                    Приглашаем Вас разделить с нами радость этого дня.
+                </div>
+            </div>
+
+
+            <!-- Таймер -->
+            <div class="timer-block">
+                <div class="timer-label-main">ДО СВАДЬБЫ ОСТАЛОСЬ:</div>
+                <div class="timer-items" id="countdownWidget">
+                    <div class="timer-unit"><div class="timer-num" id="weeks">—</div><div class="timer-label">недель</div></div>
+                    <div class="timer-unit"><div class="timer-num" id="days">—</div><div class="timer-label">дней</div></div>
+                    <div class="timer-unit"><div class="timer-num" id="hours">—</div><div class="timer-label">часов</div></div>
+                    <div class="timer-unit"><div class="timer-num" id="minutes">—</div><div class="timer-label">минут</div></div>
+                    <div class="timer-unit"><div class="timer-num" id="seconds">—</div><div class="timer-label">секунд</div></div>
+                </div>
+            </div>
+
+
+            <!-- Место проведения: картинка, адрес, текст про заселение, и кнопка "Открыть карту" после него -->
+            <div class="location-section">
+                <div class="block-title">МЕСТО ПРОВЕДЕНИЯ</div>
+                <div class="location-img">
+                    <img src="https://raw.githubusercontent.com/La-zilove/Wedding/main/location.jpg" 
+                         alt="Парк-отель Архангельская слобода"
+                         onerror="this.onerror=null; this.src='https://placehold.co/800x400/f0ece6/333333?text=Парк-отель+Архангельская+слобода';">
+                </div>
+                <div class="location-address">
+                    г. Ульяновск, парк-отель Архангельская Слобода
+                </div>
+                <!-- Текст про заселение -->
+                <div class="info-text" style="margin-top: 0rem; margin-bottom: 0.5rem;">
+                   Для гостей из других городов предусмотрено размещение.
+                </div>
+                <!-- Кнопка открыть карту — теперь ниже блока про заселение -->
+                <div class="button-wrapper">
+                    <a href="https://yandex.ru/maps/org/arkhangelskaya_sloboda/17752996213?si=ej51qjb5rwpnn47kveu08qmpdm" target="_blank" class="map-button">
+                        Открыть карту
+                    </a>
+                </div>
+            </div>
+
+
+            <!-- ПРОГРАММА ДНЯ -->
+            <div class="timing-section">
+                <div class="block-title">ТАЙМИНГ</div>
+                <div class="timing-list">
+                    <div class="timing-item"><strong>14:00</strong> — заселение гостей, которые приехали из других городов </div>
+                    <div class="timing-item"><strong>15:30</strong> — сбор гостей</div>
+                    <div class="timing-item"><strong>16:00</strong> — начало банкета</div>
+                    <div class="timing-item"><strong>22:00</strong> — завершение вечера</div>
+                    <div class="timing-item" style="margin-top: 1rem;"><strong>12:00</strong> следующего дня  — выезд из дома </div>
+                </div>
+            </div>
+
+
+            <!-- Пожелания по подаркам -->
+            <div class="section">
+                <div class="block-title">ПОЖЕЛАНИЯ ПО ПОДАРКАМ</div>
+                <div class="info-text">
+                    Лучший подарок для нас — ваше присутствие!<br><br>
+                    Мы понимаем, что дарить цветы на свадьбу — это традиция, но после праздника мы уезжаем, поэтому не сможем насладиться их красотой в полной мере.
+Мы будем рады любой другой альтернативе.
+Также нам будет приятно, если вместо цветов вы выберете цветочную подписку.              </div>
+            </div>
+
+
+            <!-- Подтверждение -->
+            <div class="section">
+                <div class="block-title">ПОДТВЕРЖДЕНИЕ</div>
+                <div class="info-text" style="margin-bottom: 0.2rem;">
+                    Пожалуйста, подтвердите свое присутствие до 01.07.2026.
+                </div>
+                <div class="info-text">
+                    <span class="waiting-text">Ждём Вас!</span>
+                </div>
+                <div class="poll-iframe">
+                    <script src="https://forms.yandex.ru/_static/embed.js"></script>
+                    <iframe src="https://forms.yandex.ru/u/6a04e71a90fa7b21a5752ada?iframe=1" 
+                            frameborder="0" 
+                            name="ya-form-6a04e71a90fa7b21a5752ada" 
+                            width="100%" 
+                            style="height: 520px; border:0;" 
+                            loading="lazy"
+                            title="Анкета гостя">
+                    </iframe>
+                </div>
+            </div>
+
+
+            <!-- Карта проезда -->
+            <div class="section">
+                <div class="block-title">КАК ДОБРАТЬСЯ</div>
+                <div class="map-frame">
+                    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A3d3bf22f5e871d4ff2db6a888127532b7c62128bb2321de22a76c34dea970839&amp;source=constructor" 
+                            width="100%" height="400" frameborder="0" loading="lazy" title="Карта проезда"></iframe>
+                </div>
+            </div>
+
+
+            <div class="footer-note">
+                © 2026 · Владислав и Эллада · будем счастливы разделить этот день с вами
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <script>
+        (function() {
+            const weddingDate = new Date(2026, 7, 1, 16, 0, 0);
+            
+            function updateTimer() {
+                const now = new Date();
+                const diffMs = weddingDate - now;
+                
+                const weeksSpan = document.getElementById('weeks');
+                const daysSpan = document.getElementById('days');
+                const hoursSpan = document.getElementById('hours');
+                const minutesSpan = document.getElementById('minutes');
+                const secondsSpan = document.getElementById('seconds');
+                
+                if (diffMs <= 0) {
+                    weeksSpan.innerText = '0';
+                    daysSpan.innerText = '0';
+                    hoursSpan.innerText = '0';
+                    minutesSpan.innerText = '0';
+                    secondsSpan.innerText = '0';
+                    return;
+                }
+                
+                const totalSeconds = Math.floor(diffMs / 1000);
+                const weeks = Math.floor(totalSeconds / (86400 * 7));
+                const days = Math.floor((totalSeconds % (86400 * 7)) / 86400);
+                const hours = Math.floor((totalSeconds % 86400) / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                const seconds = totalSeconds % 60;
+                
+                weeksSpan.innerText = weeks;
+                daysSpan.innerText = days;
+                hoursSpan.innerText = hours < 10 ? '0' + hours : hours;
+                minutesSpan.innerText = minutes < 10 ? '0' + minutes : minutes;
+                secondsSpan.innerText = seconds < 10 ? '0' + seconds : seconds;
+            }
+            
+            updateTimer();
+            setInterval(updateTimer, 1000);
+            
+            const music = document.getElementById('bg-music');
+            if (music) {
+                music.volume = 0.3;
+                const tryPlay = () => {
+                    music.play().then(() => {
+                        document.removeEventListener('click', tryPlay);
+                        document.removeEventListener('touchstart', tryPlay);
+                        document.removeEventListener('scroll', tryPlay);
+                    }).catch(e => console.log("ожидание взаимодействия"));
+                };
+                tryPlay();
+                document.addEventListener('click', tryPlay);
+                document.addEventListener('touchstart', tryPlay);
+                document.addEventListener('scroll', tryPlay, { once: true });
+                setTimeout(() => { if (music.paused) tryPlay(); }, 1000);
+            }
+        })();
+    </script>
+</body>
+</html>
